@@ -21,5 +21,10 @@
     <text class="user-motto">{{motto}}</text>
   </view>
   <text>testing</text>
+<<<<<<< HEAD
   <text>lizhenguo update</text>
+=======
+  <text>testing</text>
+
+>>>>>>> a52278636255d55b00c1e39ecd9ba37e9400af9e
 </view>
