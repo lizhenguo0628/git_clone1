@@ -21,4 +21,6 @@
     <text class="user-motto">{{motto}}</text>
   </view>
   <text>testing</text>
+  <text>testing</text>
+
 </view>
