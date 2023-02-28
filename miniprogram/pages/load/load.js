@@ -41,6 +41,7 @@ Page({
         })
         console.log("授权成功",res)
         app.globalData.userInfo = res.userInfo
+        app.globalData.hasUserInfo = true
         console.log(app.globalData.userInfo)
         wx.login({
           //成功放回

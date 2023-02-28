@@ -1,4 +1,5 @@
 const db = wx.cloud.database()
+const app = getApp()
 Page({
 
   /**
@@ -18,6 +19,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    if(!app.globalData.hasUserInfo){
+      wx.reLaunch({
+        url: '../load/load',
+      })
+    }
     var that = this
     db.collection('test').where({
       isApproval:true
