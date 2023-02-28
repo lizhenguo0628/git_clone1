@@ -1,3 +1,4 @@
+// pages/message/message.js
 const db = wx.cloud.database()
 Page({
 
@@ -5,33 +6,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-    animal:[]
+    animalInfo:null
   },
-  toDetail(e){
-    console.log(e)
-    
-    wx.reLaunch({
-      url: `/pages/detail/detail?id=${e.currentTarget.id}`,
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    var that = this
-    db.collection('test').where({
-      isApproval:true
-    }).get({
+    let that = this
+    //console.log("动物唯一标识符",options.id)
+    db.collection('test').doc(options.id).get({
       success: function(res) {
         // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
         console.log(res)
         that.setData({
-          animal:res.data,
+          animalInfo:res.data
         })
-        console.log(that.data.animal)
+        console.log("animalInfo",that.data.animalInfo)
       }
     })
     
+
   },
 
   /**
@@ -81,5 +76,11 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  donation:function(e){
+    // console.log(e)
+    wx.reLaunch({
+      url: `../donation/donation?id=${e.currentTarget.id}`,
+    })
   }
 })

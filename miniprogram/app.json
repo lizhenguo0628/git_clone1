@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/index/index",
     "pages/logs/logs",
     "pages/cloudAdoption/cloudAdoption",
@@ -9,7 +8,12 @@
     "pages/addAddress/addAddress",
     "pages/addressList/addressList",
     "pages/postAnimal/postAnimal",
-    "pages/load/load"
+    "pages/load/load",
+    "pages/myPostHistory/myPostHistory",
+    "pages/detail/detail",
+    "pages/approval/approval",
+    "pages/donation/donation",
+    "pages/findExpress/findExpress"
   ],
   "window": {
     "backgroundTextStyle": "light",

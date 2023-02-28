@@ -8,14 +8,29 @@ Page({
   data: {
     userInfo:[]
   },
-  toAdd(){
+  toFindExpress(e){
     wx.reLaunch({
-      url: '../postAnimal/postAnimal'
+      url: '../findExpress/findExpress',
+    })
+  },
+  toApproval(e){
+    wx.reLaunch({
+      url: '../approval/approval'
+    })
+  },
+  toAdd(e){
+    wx.reLaunch({
+      url: '../myPostHistory/myPostHistory'
     })
   },
   myAddress(e){
     wx.reLaunch({
       url: '../addressList/addressList',
+    })
+  },
+  toLive(e){
+    wx.reLaunch({
+      url: '../live/live',
     })
   },
   /**

@@ -11,7 +11,13 @@ Page({
     animal: "",
     sterilization:"",
     age:"",
-    picAddress:[]
+
+    picAddress:[],
+    fileID:[],
+    name:"",
+    sex:"",
+    region:[]
+
     
   },
   upload(){
@@ -23,7 +29,9 @@ Page({
       success(res){
         //const tempFilePaths = res.tempFilePaths
         that.setData({
-          images: res.tempFilePaths
+
+          images: res.tempFilePaths,
+
          });
          console.log("选择成功",res)
       }
@@ -50,9 +58,58 @@ Page({
           console.log("上传成功",res.fileID)
           that.data.images_success[index] = res.fileID;
           that.data.images_success_size = that.data.images_success_size+1;
- 
+
+          
+          console.log("lizhenguo",that.data.fileID)
+          db.collection('test').add({
+            data:{
+              age:that.data.age,
+              isSterilization:that.data.sterilization,
+              species:that.data.animal,
+              fileID:that.data.images_success,
+              region:that.data.region,
+              age:that.data.age,
+              sex:that.data.sex,
+              name:that.data.name,
+              isApproval:false, //true表示公开，false表示未公开
+              state:0  //0表示状态待定，1表示审核通过，2表示审核未通过
+            },
+            success:function(res){
+              console.log(res)
+              wx.showModal({
+                title: '提示',
+                content: '添加成功',
+                success: function (res) {
+                  if (res.confirm) {//这里是点击了确定以后
+                    wx.reLaunch({
+                      url: '../index/index',
+                    })
+                  } else {//这里是点击了取消以后
+                   
+                  }
+                }
+              })
+            },
+            fail:err=>{
+              wx.showModal({
+                title: '提示',
+                content: '添加失败',
+                success: function (res) {
+                  if (res.confirm) {//这里是点击了确定以后
+                    wx.reLaunch({
+                      url: '../postAnimal/postAnimal',
+                    })
+                  } else {//这里是点击了取消以后
+                    
+                  }
+                }
+              })
+            }
+
+          })
           if(that.data.images_success_size == that.data.images.length){
             console.log("上传成功：", that.data.images_success)
+            
           } else {
             that.uploadImage(index+1)
           }
@@ -87,23 +144,13 @@ Page({
   bthsub(res){
     let that = this;
     if(that.data.images.length > 0){//1、判断是否有图片
+
       that.setData({
         //3、给上传图片初始化一个长度，上传成功的数组和已有的数组一致
         images_success:that.data.images
       })
       that.uploadImage(0)//2、有图片时先上传第一张
-      }
-    db.collection('test').add({
-      data:{
-        age:that.data.age,
-        is:that.data.sterilization,
-        species:that.data.animal,
-        picAddress:that.data.images_success
-      },
-      success:function(res){
-        console.log(res)
-      }
-    })
+    }          
   },
 
   handleChange1:function(e) {
@@ -124,6 +171,15 @@ Page({
       sterilization:animalValue
     })
   },
+  handleChange3:function(e) {
+    let animalValue=e.detail.value;
+    let that = this;
+    console.log(animalValue)
+    // 2 把值 赋值给data中的数据
+    that.setData({
+      sex:animalValue
+    })
+  },
   handleInput:function(e) {
     let value = this.validateNumber(e.detail.value)
     console.log(value)
@@ -133,5 +189,26 @@ Page({
   },
   validateNumber(val) {
     return val.replace(/\D/g, '')
+  },
+  setName:function(e) {
+    let animalValue=e.detail.value;
+    let that = this;
+    console.log(animalValue)
+    // 2 把值 赋值给data中的数据
+    that.setData({
+      name:animalValue
+    })
+  },
+  getUserProvince:function(e)
+  {
+     this.setData({
+         region:e.detail.value     //将用户选择的省市区赋值给region
+     })
+  },
+  set:function(e)
+  {
+     this.setData({
+         region:e.detail.value     //将用户选择的省市区赋值给region
+     })
   }
 })
