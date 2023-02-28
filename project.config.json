@@ -35,7 +35,9 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "condition": false,
+    "ignoreUploadUnusedFiles": true
   },
   "appid": "wx22b562d719e06d6a",
   "projectname": "myFur",
